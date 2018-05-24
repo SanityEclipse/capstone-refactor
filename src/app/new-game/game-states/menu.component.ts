@@ -55,7 +55,7 @@ export class Menu extends Phaser.State {
         this.game.select.play();
         this.backgroundMusic.loop = false;
         this.backgroundMusic.stop();
-        this.game.state.start('Directions');
+        this.game.state.start('Level1');
 
     }
   }
