@@ -281,35 +281,35 @@ scaleRatio = window.devicePixelRatio / 3;
       //   align: 'center'
       // });
 
-      // fireballsRight = game.add.group();
-      // fireballsRight.enableBody = true;
-      // fireballsRight.physicsBodyType = Phaser.Physics.ARCADE;
-      // fireballsRight.createMultiple(20, 'fire-right');
-      // fireballsRight.setAll('anchor.x', 0.5);
-      // fireballsRight.setAll('anchor.y', 0.5);
-      // fireballsRight.setAll('outOfBoundsKill', true);
-      // fireballsRight.setAll('checkWorldBounds', true);
-      // fireballsRight.setAll('body.allowGravity', false);
-      // fireballsRight.setAll('body.setSize', fireballsRight.width * 1 / 2, fireballsRight.height * 1 / 2);
-      // fireballsRight.callAll('animations.add', 'animations', 'fire-right', [0, 1, 2, 3, 4], 5, true);
-      // fireballsRight.callAll('play', null, 'fireball-sound');
-      //
-      // fireballsLeft = game.add.group();
-      // fireballsLeft.enableBody = true;
-      // fireballsLeft.physicsBodyType = Phaser.Physics.ARCADE;
-      // fireballsLeft.createMultiple(20, 'fire-left');
-      // fireballsLeft.setAll('anchor.x', 0.5);
-      // fireballsLeft.setAll('anchor.y', 0.5);
-      // fireballsLeft.setAll('outOfBoundsKill', true);
-      // fireballsLeft.setAll('checkWorldBounds', true);
-      // fireballsLeft.setAll('body.allowGravity', false);
-      // fireballsLeft.callAll('animations.add', 'animations', 'fire-left', [0, 1, 2, 3, 4], 5, true);
-      // fireballsLeft.callAll('play', null, 'fireball-sound');
-      //
-      // fireballCollisions = game.add.group();
-      // fireballCollisions.createMultiple(30, 'big-fireball-collision');
-      // fireballCollisions.forEach(deathAnimation, this);
-      //
+      this.game.fireballsRight = this.game.add.group();
+      this.game.fireballsRight.enableBody = true;
+      this.game.fireballsRight.physicsBodyType = Phaser.Physics.ARCADE;
+      this.game.fireballsRight.createMultiple(20, 'fire-right');
+      this.game.fireballsRight.setAll('anchor.x', 0.5);
+      this.game.fireballsRight.setAll('anchor.y', 0.5);
+      this.game.fireballsRight.setAll('outOfBoundsKill', true);
+      this.game.fireballsRight.setAll('checkWorldBounds', true);
+      this.game.fireballsRight.setAll('body.allowGravity', false);
+      this.game.fireballsRight.setAll('body.setSize', this.game.fireballsRight.width * 1 / 2, this.game.fireballsRight.height * 1 / 2);
+      this.game.fireballsRight.callAll('animations.add', 'animations', 'fire-right', [0, 1, 2, 3, 4], 5, true);
+      this.game.fireballsRight.callAll('play', null, 'fireball-sound');
+
+      this.game.fireballsLeft = this.game.add.group();
+      this.game.fireballsLeft.enableBody = true;
+      this.game.fireballsLeft.physicsBodyType = Phaser.Physics.ARCADE;
+      this.game.fireballsLeft.createMultiple(20, 'fire-left');
+      this.game.fireballsLeft.setAll('anchor.x', 0.5);
+      this.game.fireballsLeft.setAll('anchor.y', 0.5);
+      this.game.fireballsLeft.setAll('outOfBoundsKill', true);
+      this.game.fireballsLeft.setAll('checkWorldBounds', true);
+      this.game.fireballsLeft.setAll('body.allowGravity', false);
+      this.game.fireballsLeft.callAll('animations.add', 'animations', 'fire-left', [0, 1, 2, 3, 4], 5, true);
+      this.game.fireballsLeft.callAll('play', null, 'fireball-sound');
+
+      this.game.fireballCollisions = this.game.add.group();
+      this.game.fireballCollisions.createMultiple(30, 'big-fireball-collision');
+      // this.game.fireballCollisions.forEach(this.game.deathAnimation, this);
+
       // function deathAnimation(enemy){
       //   enemy.anchor.x= 0.5;
       //   enemy.anchor.y= 0.5;
@@ -389,12 +389,18 @@ scaleRatio = window.devicePixelRatio / 3;
         this.player.animations.play('jump');
       }
 
-      if (this.game.controls.shoot.isDown && this.game.facing == 'right' && this.game.mana > 0) {
-        this.game.shootFireballRight();
+      if (this.game.controls.shoot.isDown
+        && this.game.facing == 'right'
+        // && this.game.mana > 0
+      ){
+        this.shootFireballRight();
       }
 
-      if (this.game.controls.shoot.isDown && this.game.facing == 'left' && this.game.mana > 0) {
-        this.game.shootFireballLeft();
+      if (this.game.controls.shoot.isDown
+        && this.game.facing == 'left'
+        // && this.game.mana > 0
+      ) {
+        this.shootFireballLeft();
       }
 
       if (this.player.body.velocity.x == 0 && this.player.body.velocity.y == 0 && !this.game.controls.shoot.isDown) {
@@ -464,35 +470,35 @@ scaleRatio = window.devicePixelRatio / 3;
     //   player.body.velocity.y = -550;
     // },
 
-    // shootFireballLeft: function() {
-    //   if (this.time.now > shootTime) {
-    //     shootTime = this.time.now + 800;
-    //     fireball = fireballsLeft.getFirstExists(false);
-    //     if (fireball) {
-    //         this.shoot.play();
-    //         fireball.reset(player.x, player.y);
-    //         player.animations.play('shoot-fireball-left');
-    //         fireball.body.velocity.x = -800;
-    //         text1.setText("HP:" + health + " MP:" + (mana -= 1));
-    //
-    //     }
-    //   }
-    // }
+    shootFireballLeft() {
+      if (this.game.time.now > this.shootTime) {
+        this.shootTime = this.game.time.now + 800;
+        this.game.fireball = this.game.fireballsLeft.getFirstExists(false);
+        if (this.game.fireball) {
+            this.game.shoot.play();
+            this.game.fireball.reset(this.player.x, this.player.y);
+            this.player.animations.play('shoot-fireball-left');
+            this.game.fireball.body.velocity.x = -800;
+            // this.text1.setText("HP:" + this.health + " MP:" + (this.mana -= 1));
+    
+        }
+      }
+    }
 
-    // shootFireballRight: function() {
-    //   if (this.time.now > shootTime) {
-    //     shootTime = this.time.now + 800;
-    //     fireball = fireballsRight.getFirstExists(false);
-    //     if (fireball) {
-    //         this.shoot.play();
-    //         fireball.reset(player.x, player.y);
-    //         player.animations.play('shoot-fireball-right');
-    //         fireball.body.velocity.x = 800;
-    //         text1.setText("HP:" + health + " MP:" + (mana -= 1));
-    //
-    //     }
-    //   }
-    // }
+    shootFireballRight() {
+      if (this.game.time.now > this.shootTime) {
+        this.shootTime = this.game.time.now + 800;
+        this.game.fireball = this.game.fireballsRight.getFirstExists(false);
+        if (this.game.fireball) {
+            this.game.shoot.play();
+            this.game.fireball.reset(this.player.x, this.player.y);
+            this.player.animations.play('shoot-fireball-right');
+            this.game.fireball.body.velocity.x = 800;
+            // this.text1.setText("HP:" + this.health + " MP:" + (this.mana -= 1));
+
+        }
+      }
+    }
 
   // spawn: function() {
   //     respawn.forEach(function(spawnPoint) {
@@ -511,4 +517,4 @@ scaleRatio = window.devicePixelRatio / 3;
 //     return Phaser.Rectangle.intersects(boundsA, boundsB);
 //   }
 //
-// }
+}
