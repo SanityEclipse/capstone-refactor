@@ -15,7 +15,7 @@ export class Level1 extends Phaser.State {
   }
 
 
-  AngryPlant = function(index, game, x, y){
+  AngryPlant = function(index, game, x, y) {
     this.angryPlant = game.add.sprite(x, y, 'angry-plant');
     this.angryPlant.anchor.setTo(0.5, 0.5);
     this.angryPlant.name = index.toString();
@@ -99,49 +99,46 @@ export class Level1 extends Phaser.State {
     this.deathSpikes.body.immovable = false;
     this.deathSpikes.body.collideWorldBounds = true;
     this.deathSpikes.body.allowGravity = false;
-
-
   }
+
   //BATS
-  // var enemy0;
-  // var enemy1;
-  // var enemy2;
-  // var enemy3;
-  // var enemy4;
-  // var enemy5;
-  // var enemy6;
-  // var enemy12;
-  // var enemy13;
+  enemy0;
+  enemy1;
+  enemy2;
+  enemy3;
+  enemy4;
+  enemy5;
+  enemy6;
+  enemy12;
+  enemy13;
 
   //ANGRY PLANTS
 
-  // var enemy7;
-  // var enemy8;
-  // var enemy9;
-  // var enemy10;
-  // var enemy11;
+  enemy7;
+  enemy8;
+  enemy9;
+  enemy10;
+  enemy11;
 
 
-controls = {};
-door;
-fireballCollisions;
-facing = 'right';
-fireballs;
-health = 10;
-jumpTimer = 0;
-key = 0;
-mana = 10;
-playerSpeed = 400;
-respawn;
-score = 0;
-shootTime = 0;
-spikes;
-// text0;
-// text1;
-// text2;
-// text3;
+  controls = {};
+  door;
+  fireballCollisions;
+  facing = 'right';
+  fireballs;
+  health = 10;
+  jumpTimer = 0;
+  key = 0;
+  mana = 10;
+  playerSpeed = 400;
+  respawn;
+  score = 0;
+  shootTime = 0;
+  spikes;
+  redGem;
+  blueGem;
 
-scaleRatio = window.devicePixelRatio / 3;
+  scaleRatio = window.devicePixelRatio / 3;
 
     create() {
 
@@ -183,7 +180,6 @@ scaleRatio = window.devicePixelRatio / 3;
 
       this.player = this.game.add.sprite(0, 0, 'player');
       this.player.anchor.setTo(0.5, 0.5);
-      // this.game.spawn();
 
       // spawn function is invoked on player object here
 
@@ -217,14 +213,14 @@ scaleRatio = window.devicePixelRatio / 3;
       // red0 = new RedGemItem(0, game, player.x + 0, player.y + 800);
       // red1 = new RedGemItem(0, game, player.x + 2492, player.y + -330);
       // red2 = new RedGemItem(0, game, player.x + 2525, player.y + 175);
-      //
+
       // key0 = new GoldKeyItem(0, game, player.x + 0, player.y + 400);
       // key1 = new GoldKeyItem(0, game, player.x + 2950, player.y + 650);
-      //
+
       // magic0 = new MagicBeakerItem(0, game, player.x + 3046, player.y + -94);
       // magic1 = new MagicBeakerItem(0, game, player.x + , player.y+ );
 
-      // enemy0 = new Enemybat(0, game, player.x + 260, player.y - 75);
+      this.game.enemy0 = new this.Enemybat(0, this.game, this.player.x + 260, this.player.y + 300);
       // enemy1 = new Enemybat(0, game, player.x + 475, player.y - 75);
       // enemy2 = new Enemybat(0, game, player.x + 725, player.y - 75);
       // enemy3 = new Enemybat(0, game, player.x + 475, player.y + 200);
@@ -233,23 +229,18 @@ scaleRatio = window.devicePixelRatio / 3;
       // enemy6 = new Enemybat(0, game, player.x + 2900, player.y - 100);
       // enemy13 = new Enemybat(0, game, player.x + 2300, player.y - 125);
       // enemy14 = new Enemybat(0, game, player.x + 2100, player.y - 100);
-      //
+
       // enemy7  = new AngryPlant(0, game, player.x + 15, player.y + 415);
       // enemy8  = new AngryPlant(0, game, player.x + 500, player.y + 800);
       // enemy9  = new AngryPlant(0, game, player.x + 300, player.y + 800);
       // enemy10 = new AngryPlant(0, game, player.x + 100, player.y + 800);
       // enemy11 = new AngryPlant(0, game, player.x + 2545, player.y + 280);
       // enemy12 = new AngryPlant(0, game, player.x + 2700, player.y -350);
-      //
+
       // door = this.add.sprite(player.x + 1410, player.y + 610, 'door');
       //        this.physics.arcade.enable(door);
       //        door.body.allowGravity = false;
       //        door.body.immovable = true;
-
-          this.game.portait = this.game.add.sprite(5, 5, 'portait');
-          this.game.portait.scale.x= 0.5;
-          this.game.portait.scale.y= 0.5;
-          this.game.portait.fixedToCamera = true;
 
       // spikes0 = new DeathSpikes(0, game, player.x + 2408, player.y + 714);
       // spikes1 = new DeathSpikes(0, game, player.x + 2472, player.y + 714);
@@ -290,13 +281,20 @@ scaleRatio = window.devicePixelRatio / 3;
 
       this.game.fireballCollisions = this.game.add.group();
       this.game.fireballCollisions.createMultiple(30, 'big-fireball-collision');
-      // this.game.fireballCollisions.forEach(this.game.deathAnimation, this);
+      this.game.fireballCollisions.forEach(deathAnimation, this);
 
-      // function deathAnimation(enemy){
-      //   enemy.anchor.x= 0.5;
-      //   enemy.anchor.y= 0.5;
-      //   enemy.animations.add('big-fireball-collision')
-      // }
+      function deathAnimation(enemy){
+        enemy.anchor.x= 0.5;
+        enemy.anchor.y= 0.5;
+        enemy.animations.add('big-fireball-collision')
+      }
+
+      // Player Interface & Information
+
+      this.game.portait = this.game.add.sprite(5, 5, 'portait');
+      this.game.portait.scale.x= 0.5;
+      this.game.portait.scale.y= 0.5;
+      this.game.portait.fixedToCamera = true;
 
       this.game.text0 = this.game.add.text(this.game.camera.x + 65, this.game.camera.y + 5, "Score: " + this.score, {
         font: '20px Press Start 2P',
@@ -325,8 +323,6 @@ scaleRatio = window.devicePixelRatio / 3;
 
     update() {
 
-
-
       this.player.body.velocity.x = 0;
 
       this.game.physics.arcade.collide(this.player, this.game.blockedLayer);
@@ -334,32 +330,48 @@ scaleRatio = window.devicePixelRatio / 3;
       // this.game.physics.arcade.collide([enemy7.angryPlant, enemy8.angryPlant, enemy9.angryPlant, enemy10.angryPlant, enemy11.angryPlant, enemy12.angryPlant], blockedLayer);
 
       // this.physics.arcade.collide(player, door, this.nextLevel, null, this);
-      //
+
       // this.physics.arcade.collide(player, [blue0.blueGem, blue1.blueGem, blue2.blueGem, blue3.blueGem, blue4.blueGem, blue5.blueGem, blue6.blueGem, blue7.blueGem], this.item100, null, this);
       // this.physics.arcade.collide(player, [red0.redGem, red1.redGem, red2.redGem], this.item500, null, this);
       // this.physics.arcade.collide(player, [key0.goldKey, key1.goldKey], this.itemKey, null, this);
       // this.physics.arcade.collide(player, [magic0.magicBeaker], this.itemMagicBeaker, null, this);
-      //
-      // this.physics.arcade.collide(player, [spikes0.deathSpikes, spikes1.deathSpikes, spikes2.deathSpikes, spikes3.deathSpikes, spikes4.deathSpikes, spikes5.deathSpikes, spikes6.deathSpikes, spikes7.deathSpikes, spikes8.deathSpikes, spikes9.deathSpikes], this.deathPit, null, this);
-      //
-      // this.physics.arcade.collide(player, [enemy0.bat, enemy1.bat, enemy2.bat, enemy3.bat, enemy4.bat, enemy5.bat, enemy6.bat, enemy7.angryPlant, enemy8.angryPlant, enemy9.angryPlant, enemy10.angryPlant, enemy11.angryPlant, enemy12.angryPlant, enemy13.bat, enemy14.bat], this.playerDamage);
-      //
-      // this.physics.arcade.overlap(fireballsRight, [enemy0.bat, enemy1.bat, enemy2.bat, enemy3.bat, enemy4.bat, enemy5.bat, enemy6.bat, enemy13.bat, enemy14.bat], this.collisionHandler, null, this);
-      //
-      // this.physics.arcade.overlap(fireballsLeft, [enemy0.bat, enemy1.bat, enemy2.bat, enemy3.bat, enemy4.bat, enemy5.bat, enemy6.bat, enemy13.bat, enemy14.bat], this.collisionHandler, null, this);
-      //
-      // this.physics.arcade.overlap(fireballsLeft, [enemy7.angryPlant, enemy8.angryPlant, enemy9.angryPlant, enemy10.angryPlant, enemy11.angryPlant, enemy12.angryPlant], this.collisionHandler1, null, this);
-      //
-      // this.physics.arcade.overlap(fireballsRight, [enemy7.angryPlant, enemy8.angryPlant, enemy9.angryPlant, enemy10.angryPlant, enemy11.angryPlant, enemy12.angryPlant], this.collisionHandler1, null, this);
 
-      // if (health <= 0){
-      //   this.deathScream.play();
-      //   backgroundMusic.mute = true;
-      //   this.state.start('Endgame', true, false);
-      //   key = 0;
-      //   health = 10;
-      //
-      // }
+      // this.physics.arcade.collide(player, [spikes0.deathSpikes, spikes1.deathSpikes, spikes2.deathSpikes, spikes3.deathSpikes, spikes4.deathSpikes, spikes5.deathSpikes, spikes6.deathSpikes, spikes7.deathSpikes, spikes8.deathSpikes, spikes9.deathSpikes], this.deathPit, null, this);
+
+      this.game.physics.arcade.collide(this.game.player,[
+        this.game.enemy0.bat,
+        // enemy1.bat, enemy2.bat, enemy3.bat, enemy4.bat, enemy5.bat, enemy6.bat, enemy7.angryPlant, enemy8.angryPlant, enemy9.angryPlant, enemy10.angryPlant, enemy11.angryPlant, enemy12.angryPlant, enemy13.bat, enemy14.bat
+      ], this.playerDamage);
+
+      this.game.physics.arcade
+          .overlap(this.game.fireballsRight,
+          [
+            this.game.enemy0.bat,
+            // enemy1.bat, enemy2.bat, enemy3.bat, enemy4.bat, enemy5.bat, enemy6.bat, enemy13.bat, enemy14.bat
+          ], this.collisionHandler, null, this);
+
+      // this.physics.arcade.overlap(fireballsLeft, [enemy0.bat, enemy1.bat, enemy2.bat, enemy3.bat, enemy4.bat, enemy5.bat, enemy6.bat, enemy13.bat, enemy14.bat], this.collisionHandler, null, this);
+
+      // this.physics.arcade.overlap(fireballsLeft, [enemy7.angryPlant, enemy8.angryPlant, enemy9.angryPlant, enemy10.angryPlant, enemy11.angryPlant, enemy12.angryPlant], this.collisionHandler1, null, this);
+
+      // this.game.physics.arcade
+      //   .overlap(this.game.fireballsRight,
+      //     [
+      //       this.enemy7.angryPlant,
+      //       this.enemy8.angryPlant,
+      //       this.enemy9.angryPlant,
+      //       this.enemy10.angryPlant,
+      //       this.enemy11.angryPlant,
+      //       this.enemy12.angryPlant
+      //     ], this.collisionHandler1, null, this);
+
+      if (this.health <= 0){
+        this.game.deathScream.play();
+        this.game.backgroundMusic.mute = true;
+        this.game.state.start('Endgame', true, false);
+        this.key = 0;
+        this.health = 10;
+      }
 
       if (this.game.controls.right.isDown) {
         if (this.player.body.onFloor() || this.player.body.touching.down) {
@@ -412,65 +424,65 @@ scaleRatio = window.devicePixelRatio / 3;
 
     }
 
-    // collisionHandler: function(fireball, bat) {
-    //   fireball.kill();
-    //   bat.kill();
-    //   text0.setText("Score: " + (score += 50));
-    //   var fireballCollision = fireballCollisions.getFirstExists(false);
-    //   fireballCollision.reset(bat.body.x + 75, bat.body.y + 30);
-    //   fireballCollision.play('big-fireball-collision', 10, false, true);
-    // },
-    //
-    // collisionHandler1: function(fireball, angryPlant){
-    //   fireball.kill();
-    //   angryPlant.kill();
-    //   text0.setText("Score: " + (score += 150));
-    //   var fireballCollision = fireballCollisions.getFirstExists(false);
-    //   fireballCollision.reset(angryPlant.body.x - 15, angryPlant.body.y + 30);
-    //   fireballCollision.play('big-fireball-collision', 10, false, true);
-    // },
-    //
-    // deathPit: function (player, deathSpikes) {
-    //   health = 0;
-    // },
-    //
-    // item100: function(player, blueGem) {
-    //   blueGem.kill();
-    //   this.pickupItem.play();
-    //   text0.setText("Score: " + (score += 100));
-    // },
-    //
-    // item500: function(player, redGem) {
-    //   redGem.kill();
-    //   this.pickupItem.play();
-    //   text0.setText("Score: " + (score += 500));
-    // },
-    //
-    // itemKey: function(player, goldKey) {
-    //   goldKey.kill();
-    //   this.pickupItem.play();
-    //   text3.setText("Keys: " + (key += 1) +"/2");
-    // },
-    //
-    // itemMagicBeaker : function (player, magicBeaker) {
-    //   magicBeaker.kill();
-    //   this.pickupItem.play();
-    //   text1.setText("HP:" + health + " MP:" + (mana += 10));
-    // },
-    //
-    // nextLevel: function() {
-    //   if (key >= 2) {
-    //   backgroundMusic.mute = true;
-    //   key = 0;
-    //   this.state.start('Endgame', true, false);
-    //   }
-    // },
-    //
-    // playerDamage: function() {
-    //   text1.setText("HP:" + (health -= 1) + " MP:" + mana);
-    //   player.animations.play('damage');
-    //   player.body.velocity.y = -550;
-    // },
+    collisionHandler(fireball, bat) {
+      this.game.fireball.kill();
+      this.game.enemy0.bat.kill();
+      this.game.text0.setText("Score: " + (this.score += 50));
+      this.game.fireballCollision = this.game.fireballCollisions.getFirstExists(false);
+      // this.game.fireballCollision.reset(this.game.bat.body.x + 75, this.game.bat.body.y + 30);
+      this.game.fireballCollision.play('big-fireball-collision', 10, false, true);
+    }
+
+    collisionHandler1(fireball, angryPlant){
+      this.game.fireball.kill();
+      this.game.angryPlant.kill();
+      this.game.text0.setText("Score: " + (this.score += 150));
+      this.game.fireballCollision = this.game.fireballCollisions.getFirstExists(false);
+      this.game.fireballCollision.reset(this.game.angryPlant.body.x - 15, this.game.angryPlant.body.y + 30);
+      this.game.fireballCollision.play('big-fireball-collision', 10, false, true);
+    }
+
+    deathPit(player, deathSpikes) {
+      this.health = 0;
+    }
+
+    item100(player, blueGem) {
+      this.game.blueGem.kill();
+      this.game.pickupItem.play();
+      this.game.text0.setText("Score: " + (this.score += 100));
+    }
+
+    item500(player, redGem) {
+      this.game.redGem.kill();
+      this.game.pickupItem.play();
+      this.game.text0.setText("Score: " + (this.score += 500));
+    }
+
+    itemKey(player, goldKey) {
+      this.game.goldKey.kill();
+      this.game.pickupItem.play();
+      this.game.text3.setText("Keys: " + (this.key += 1) +"/2");
+    }
+
+    itemMagicBeaker(player, magicBeaker) {
+      magicBeaker.kill();
+      this.game.pickupItem.play();
+      this.game.text1.setText("HP:" + this.health + " MP:" + (this.mana += 10));
+    }
+
+    nextLevel() {
+      if (this.key >= 2) {
+      this.game.backgroundMusic.mute = true;
+      this.key = 0;
+      this.game.state.start('Endgame', true, false);
+      }
+    }
+
+    playerDamage() {
+      this.game.text1.setText("HP:" + (this.health -= 1) + " MP:" + this.mana);
+      this.player.animations.play('damage');
+      this.game.player.body.velocity.y = -550;
+    }
 
     shootFireballLeft() {
       if (this.game.time.now > this.shootTime) {
@@ -502,21 +514,19 @@ scaleRatio = window.devicePixelRatio / 3;
       }
     }
 
-  // spawn: function() {
-  //     respawn.forEach(function(spawnPoint) {
-  //       player.reset(spawnPoint.x, spawnPoint.y);
-  //     }, this);
-  //   }
+    spawn() {
+        this.game.respawn.forEach(function(spawnPoint) {
+          this.player.reset(spawnPoint.x, spawnPoint.y);
+        }, this);
+    }
 
+    checkOverlap(spriteA, spriteB) {
+      if (spriteA.alive == false || spriteB.alive == false) {
+        return false
+      }
+      var boundsA = spriteA.getBounds();
+      var boundsB = spriteB.getBounds();
+      return Phaser.Rectangle.intersects(boundsA, boundsB);
+    }
 
-
-//   function checkOverlap(spriteA, spriteB) {
-//     if (spriteA.alive == false || spriteB.alive == false) {
-//       return false
-//     }
-//     var boundsA = spriteA.getBounds();
-//     var boundsB = spriteB.getBounds();
-//     return Phaser.Rectangle.intersects(boundsA, boundsB);
-//   }
-//
 }
