@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import * as Phaser from '../../../node_modules/phaser-ce/build/phaser.js';
 
@@ -13,7 +13,7 @@ import { Level1 }    from './game-states/level-1.component';
   styleUrls: ['new-game.component.css']
 })
 
-export class NewGameComponent{
+export class NewGameComponent implements OnInit {
 
     game : Phaser.Game;
 
@@ -24,6 +24,14 @@ export class NewGameComponent{
     this.game.state.add('Menu', Menu, false);
     this.game.state.add('Level1', Level1, false);
     this.game.state.start('Boot', true, true);
+  }
+
+  ngOnInit() {
+    // var game = new NewGameComponent();
+  }
+
+  ngOnDestroy() {
+    this.game.destroy();
   }
 
 }

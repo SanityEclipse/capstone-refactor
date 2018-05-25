@@ -7,6 +7,7 @@ import * as Phaser from '../../../../node_modules/phaser-ce/build/phaser.js';
 export class Preloader extends Phaser.State {
 
   game : Phaser.Game;
+  map  : Phaser.Tilemap;
 
   constructor() {
     super();
@@ -20,7 +21,7 @@ export class Preloader extends Phaser.State {
     this.game.load.setPreloadSprite(this.game.preloadBar);
 
     this.game.load.tilemap('myMap', '../../../assets/maps/level1smaller.json', null, Phaser.Tilemap.TILED_JSON);
-    this.game.load.image('tileset', '../../../assets/images/world/reducedtileset.png');
+    this.game.load.image('reducedtileset', '../../../assets/images/world/reducedtileset.png');
     this.game.load.image('Level_Bg', '../../../assets/images/world/background.jpg');
 
     this.game.load.image('portait', '../../../assets/images/player/portait.png');
