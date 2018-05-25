@@ -136,10 +136,10 @@ respawn;
 score = 0;
 shootTime = 0;
 spikes;
-text0;
-text1;
-text2;
-text3;
+// text0;
+// text1;
+// text2;
+// text3;
 
 scaleRatio = window.devicePixelRatio / 3;
 
@@ -148,10 +148,10 @@ scaleRatio = window.devicePixelRatio / 3;
 
       this.game.camera.flash('#000000');
 
-      var background = this.game.add.image(0, 0, "Level_Bg");
-          background.width = this.game.width;
-          background.height = this.game.height;
-          background.fixedToCamera = true;
+      this.game.background = this.game.add.image(0, 0, "Level_Bg");
+      this.game.background.width = this.game.width;
+      this.game.background.height = this.game.height;
+      this.game.background.fixedToCamera = true;
 
       this.game.shoot = this.game.add.audio("fireball-sound");
       this.game.jumpSound = this.game.add.audio("jump-sound");
@@ -245,12 +245,12 @@ scaleRatio = window.devicePixelRatio / 3;
       //        this.physics.arcade.enable(door);
       //        door.body.allowGravity = false;
       //        door.body.immovable = true;
-      //
-      // var portait = this.add.sprite(5, 5, 'portait');
-      //     portait.scale.x= 0.5;
-      //     portait.scale.y= 0.5;
-      //     portait.fixedToCamera = true;
-      //
+
+          this.game.portait = this.game.add.sprite(5, 5, 'portait');
+          this.game.portait.scale.x= 0.5;
+          this.game.portait.scale.y= 0.5;
+          this.game.portait.fixedToCamera = true;
+
       // spikes0 = new DeathSpikes(0, game, player.x + 2408, player.y + 714);
       // spikes1 = new DeathSpikes(0, game, player.x + 2472, player.y + 714);
       // spikes2 = new DeathSpikes(0, game, player.x + 2536, player.y + 714);
@@ -262,24 +262,6 @@ scaleRatio = window.devicePixelRatio / 3;
       // spikes8 = new DeathSpikes(0, game, player.x + 1026, player.y + 0);
       // spikes8 = new DeathSpikes(0, game, player.x + 1090, player.y + 0);
       // spikes9 = new DeathSpikes(0, game, player.x + 1154, player.y + 0);
-      //
-      // text0 = game.add.text(game.camera.x + 65, game.camera.y + 5, "Score: " + score, {
-      //   font: '20px Press Start 2P',
-      //   fill: '#ffffff',
-      //   align: 'center'
-      // });
-      //
-      // text1 = game.add.text(game.camera.x + 65, game.camera.y + 25, "HP:" + health + " MP:" + mana, {
-      //   font: '20px Press Start 2P',
-      //   fill: '#ffffff',
-      //   align: 'center'
-      // });
-
-      // text3 = game.add.text(game.camera.x + 65, game.camera.y + 45, "Keys: " + key +"/2", {
-      //   font: '20px Press Start 2P',
-      //   fill: '#ffffff',
-      //   align: 'center'
-      // });
 
       this.game.fireballsRight = this.game.add.group();
       this.game.fireballsRight.enableBody = true;
@@ -315,15 +297,35 @@ scaleRatio = window.devicePixelRatio / 3;
       //   enemy.anchor.y= 0.5;
       //   enemy.animations.add('big-fireball-collision')
       // }
-      //
-      // text0.fixedToCamera = true;
-      // text1.fixedToCamera = true;
-      // text2.fixedToCamera = true;
-      // text3.fixedToCamera = true;
+
+      this.game.text0 = this.game.add.text(this.game.camera.x + 65, this.game.camera.y + 5, "Score: " + this.score, {
+        font: '20px Press Start 2P',
+        fill: '#ffffff',
+        align: 'center'
+      });
+
+      this.game.text1 = this.game.add.text(this.game.camera.x + 65, this.game.camera.y + 25, "HP:" + this.health + " MP:" + this.mana, {
+        font: '20px Press Start 2P',
+        fill: '#ffffff',
+        align: 'center'
+      });
+
+      this.game.text3 = this.game.add.text(this.game.camera.x + 65, this.game.camera.y + 45, "Keys: " + this.key +"/2", {
+        font: '20px Press Start 2P',
+        fill: '#ffffff',
+        align: 'center'
+      });
+
+      this.game.text0.fixedToCamera = true;
+      this.game.text1.fixedToCamera = true;
+      this.game.text2.fixedToCamera = true;
+      this.game.text3.fixedToCamera = true;
 
     }
 
     update() {
+
+
 
       this.player.body.velocity.x = 0;
 
@@ -391,14 +393,14 @@ scaleRatio = window.devicePixelRatio / 3;
 
       if (this.game.controls.shoot.isDown
         && this.game.facing == 'right'
-        // && this.game.mana > 0
+        && this.mana > 0
       ){
         this.shootFireballRight();
       }
 
       if (this.game.controls.shoot.isDown
         && this.game.facing == 'left'
-        // && this.game.mana > 0
+        && this.mana > 0
       ) {
         this.shootFireballLeft();
       }
@@ -479,8 +481,8 @@ scaleRatio = window.devicePixelRatio / 3;
             this.game.fireball.reset(this.player.x, this.player.y);
             this.player.animations.play('shoot-fireball-left');
             this.game.fireball.body.velocity.x = -800;
-            // this.text1.setText("HP:" + this.health + " MP:" + (this.mana -= 1));
-    
+            this.game.text1.setText("HP:" + this.health + " MP:" + (this.mana -= 1));
+
         }
       }
     }
@@ -494,7 +496,7 @@ scaleRatio = window.devicePixelRatio / 3;
             this.game.fireball.reset(this.player.x, this.player.y);
             this.player.animations.play('shoot-fireball-right');
             this.game.fireball.body.velocity.x = 800;
-            // this.text1.setText("HP:" + this.health + " MP:" + (this.mana -= 1));
+            this.game.text1.setText("HP:" + this.health + " MP:" + (this.mana -= 1));
 
         }
       }
