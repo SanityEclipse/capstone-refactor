@@ -179,7 +179,7 @@ export class Level1 extends Phaser.State {
 
       // this.map.createFromObjects('Object Layer 1', 1, '', 0, true, false, this.respawn); //spawn point
 
-      this.game.player = this.game.add.sprite(0, 0, 'player');
+      this.game.player = this.game.add.sprite(10, 515, 'player');
       this.game.player.anchor.setTo(0.5, 0.5);
 
       // spawn function is invoked on player object here
@@ -202,24 +202,23 @@ export class Level1 extends Phaser.State {
         shoot: this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
       }
 
-      this.game.blue0 = new this.BlueGemItem(0, this.game, this.game.player.x + 100, this.game.player.y + 300);
-      // blue1 = new BlueGemItem(0, game, player.x + 215, player.y - 50);
-      // blue2 = new BlueGemItem(0, game, player.x + 725, player.y - 50);
-      // blue3 = new BlueGemItem(0, game, player.x + 425, player.y + 400);
-      // blue4 = new BlueGemItem(0, game, player.x + 1550, player.y + -70);
-      // blue5 = new BlueGemItem(0, game, player.x + 2950, player.y + 275);
-      // blue6 = new BlueGemItem(0, game, player.x + 2165, player.y + 175);
-      // blue7 = new BlueGemItem(0, game, player.x + 1350, player.y + 300);
+      this.game.blue0 = new this.BlueGemItem(0, this.game, this.game.player.x + 100, this.game.player.y);
+      this.game.blue1 = new this.BlueGemItem(0, this.game, this.game.player.x + 215, this.game.player.y - 50);
+      this.game.blue2 = new this.BlueGemItem(0, this.game, this.game.player.x + 725, this.game.player.y - 50);
+      this.game.blue3 = new this.BlueGemItem(0, this.game, this.game.player.x + 425, this.game.player.y + 400);
+      this.game.blue4 = new this.BlueGemItem(0, this.game, this.game.player.x + 1550,this.game.player.y + -70);
+      this.game.blue5 = new this.BlueGemItem(0, this.game, this.game.player.x + 2950,this.game.player.y + 275);
+      this.game.blue6 = new this.BlueGemItem(0, this.game, this.game.player.x + 2165,this.game.player.y + 175);
+      this.game.blue7 = new this.BlueGemItem(0, this.game, this.game.player.x + 1350,this.game.player.y + 300);
 
-      // red0 = new RedGemItem(0, game, player.x + 0, player.y + 800);
-      // red1 = new RedGemItem(0, game, player.x + 2492, player.y + -330);
-      // red2 = new RedGemItem(0, game, player.x + 2525, player.y + 175);
+      this.game.red0 = new this.RedGemItem(0, this.game, this.game.player.x + 0, this.game.player.y + 800);
+      this.game.red1 = new this.RedGemItem(0, this.game, this.game.player.x + 2492, this.game.player.y + -330);
+      this.game.red2 = new this.RedGemItem(0, this.game, this.game.player.x + 2525, this.game.player.y + 175);
 
-      // key0 = new GoldKeyItem(0, game, player.x + 0, player.y + 400);
-      // key1 = new GoldKeyItem(0, game, player.x + 2950, player.y + 650);
+      this.game.key0 = new this.GoldKeyItem(0, this.game, this.game.player.x + 0, this.game.player.y + 400);
+      this.game.key1 = new this.GoldKeyItem(0, this.game, this.game.player.x + 2950, this.game.player.y + 650);
 
-      // magic0 = new MagicBeakerItem(0, game, player.x + 3046, player.y + -94);
-      // magic1 = new MagicBeakerItem(0, game, player.x + , player.y+ );
+      this.game.magic0 = new this.MagicBeakerItem(0, this.game, this.game.player.x + 3046, this.game.player.y + -94);
 
       this.game.enemy0  = new this.Enemybat(0, this.game, this.game.player.x + 260, this.game.player.y + 350);
       this.game.enemy1  = new this.Enemybat(0, this.game, this.game.player.x + 475, this.game.player.y - 75);
@@ -243,17 +242,17 @@ export class Level1 extends Phaser.State {
       this.game.door.body.allowGravity = false;
       this.game.door.body.immovable = true;
 
-      // spikes0 = new DeathSpikes(0, game, player.x + 2408, player.y + 714);
-      // spikes1 = new DeathSpikes(0, game, player.x + 2472, player.y + 714);
-      // spikes2 = new DeathSpikes(0, game, player.x + 2536, player.y + 714);
-      // spikes3 = new DeathSpikes(0, game, player.x + 2600, player.y + 714);
-      // spikes4 = new DeathSpikes(0, game, player.x + 770, player.y + 0);
-      // spikes5 = new DeathSpikes(0, game, player.x + 834, player.y + 0);
-      // spikes6 = new DeathSpikes(0, game, player.x + 898, player.y + 0);
-      // spikes7 = new DeathSpikes(0, game, player.x + 962, player.y + 0);
-      // spikes8 = new DeathSpikes(0, game, player.x + 1026, player.y + 0);
-      // spikes8 = new DeathSpikes(0, game, player.x + 1090, player.y + 0);
-      // spikes9 = new DeathSpikes(0, game, player.x + 1154, player.y + 0);
+      this.game.spikes0 = new this.DeathSpikes(0, this.game, this.game.player.x + 2408,this.game.player.y + 714);
+      this.game.spikes1 = new this.DeathSpikes(0, this.game, this.game.player.x + 2472,this.game.player.y + 714);
+      this.game.spikes2 = new this.DeathSpikes(0, this.game, this.game.player.x + 2536,this.game.player.y + 714);
+      this.game.spikes3 = new this.DeathSpikes(0, this.game, this.game.player.x + 2600,this.game.player.y + 714);
+      this.game.spikes4 = new this.DeathSpikes(0, this.game, this.game.player.x + 770, this.game.player.y + 0);
+      this.game.spikes5 = new this.DeathSpikes(0, this.game, this.game.player.x + 834, this.game.player.y + 0);
+      this.game.spikes6 = new this.DeathSpikes(0, this.game, this.game.player.x + 898, this.game.player.y + 0);
+      this.game.spikes7 = new this.DeathSpikes(0, this.game, this.game.player.x + 962, this.game.player.y + 0);
+      this.game.spikes8 = new this.DeathSpikes(0, this.game, this.game.player.x + 1026,this.game.player.y + 0);
+      this.game.spikes8 = new this.DeathSpikes(0, this.game, this.game.player.x + 1090,this.game.player.y + 0);
+      this.game.spikes9 = new this.DeathSpikes(0, this.game, this.game.player.x + 1154,this.game.player.y + 0);
 
       this.game.fireballsRight = this.game.add.group();
       this.game.fireballsRight.enableBody = true;
@@ -348,13 +347,47 @@ export class Level1 extends Phaser.State {
         .collide(this.game.player,
           [
             this.game.blue0.blueGem,
-            // blue1.blueGem, blue2.blueGem, blue3.blueGem, blue4.blueGem, blue5.blueGem, blue6.blueGem, blue7.blueGem
+            this.game.blue1.blueGem,
+            this.game.blue2.blueGem,
+            this.game.blue3.blueGem,
+            this.game.blue4.blueGem,
+            this.game.blue5.blueGem,
+            this.game.blue6.blueGem,
+            this.game.blue7.blueGem
           ], this.item100, null, this);
-      // this.physics.arcade.collide(player, [red0.redGem, red1.redGem, red2.redGem], this.item500, null, this);
-      // this.physics.arcade.collide(player, [key0.goldKey, key1.goldKey], this.itemKey, null, this);
-      // this.physics.arcade.collide(player, [magic0.magicBeaker], this.itemMagicBeaker, null, this);
+      this.game.physics.arcade
+        .collide(this.game.player,
+          [
+            this.game.red0.redGem,
+            this.game.red1.redGem,
+            this.game.red2.redGem
+          ], this.item500, null, this);
+      this.game.physics.arcade
+        .collide(this.game.player,
+          [
+            this.game.key0.goldKey,
+            this.game.key1.goldKey
+          ], this.itemKey, null, this);
+      this.game.physics.arcade
+        .collide(this.game.player,
+          [
+            this.game.magic0.magicBeaker
+          ], this.itemMagicBeaker, null, this);
 
-      // this.physics.arcade.collide(player, [spikes0.deathSpikes, spikes1.deathSpikes, spikes2.deathSpikes, spikes3.deathSpikes, spikes4.deathSpikes, spikes5.deathSpikes, spikes6.deathSpikes, spikes7.deathSpikes, spikes8.deathSpikes, spikes9.deathSpikes], this.deathPit, null, this);
+      this.game.physics.arcade
+        .collide(this.game.player,
+          [
+            this.game.spikes0.deathSpikes,
+            this.game.spikes1.deathSpikes,
+            this.game.spikes2.deathSpikes,
+            this.game.spikes3.deathSpikes,
+            this.game.spikes4.deathSpikes,
+            this.game.spikes5.deathSpikes,
+            this.game.spikes6.deathSpikes,
+            this.game.spikes7.deathSpikes,
+            this.game.spikes8.deathSpikes,
+            this.game.spikes9.deathSpikes
+          ], this.deathPit, null, this);
 
       this.game.physics.arcade
         .collide(this.game.player,
@@ -376,7 +409,7 @@ export class Level1 extends Phaser.State {
             this.game.enemy14.bat
           ], this.playerDamage
         );
-        
+
       this.game.physics.arcade
         .overlap(this.game.fireballsRight,
           [
