@@ -120,6 +120,7 @@ export class Level1 extends Phaser.State {
   enemy9;
   enemy10;
   enemy11;
+
   controls = {};
   door;
   fireballCollisions;
@@ -132,6 +133,7 @@ export class Level1 extends Phaser.State {
   spikes;
   redGem;
   blueGem;
+
 
   scaleRatio = window.devicePixelRatio / 3;
 
@@ -200,7 +202,7 @@ export class Level1 extends Phaser.State {
         shoot: this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
       }
 
-      // blue0 = new BlueGemItem(0, game, player.x + 100, player.y - 30);
+      this.game.blue0 = new this.BlueGemItem(0, this.game, this.game.player.x + 100, this.game.player.y + 300);
       // blue1 = new BlueGemItem(0, game, player.x + 215, player.y - 50);
       // blue2 = new BlueGemItem(0, game, player.x + 725, player.y - 50);
       // blue3 = new BlueGemItem(0, game, player.x + 425, player.y + 400);
@@ -219,27 +221,27 @@ export class Level1 extends Phaser.State {
       // magic0 = new MagicBeakerItem(0, game, player.x + 3046, player.y + -94);
       // magic1 = new MagicBeakerItem(0, game, player.x + , player.y+ );
 
-      this.game.enemy0 = new this.Enemybat(0, this.game, this.game.player.x + 260, this.game.player.y + 300);
-      // enemy1 = new Enemybat(0, game, player.x + 475, player.y - 75);
-      // enemy2 = new Enemybat(0, game, player.x + 725, player.y - 75);
-      // enemy3 = new Enemybat(0, game, player.x + 475, player.y + 200);
-      // enemy4 = new Enemybat(0, game, player.x + 2500, player.y - 100);
-      // enemy5 = new Enemybat(0, game, player.x + 2700, player.y - 125);
-      // enemy6 = new Enemybat(0, game, player.x + 2900, player.y - 100);
-      // enemy13 = new Enemybat(0, game, player.x + 2300, player.y - 125);
-      // enemy14 = new Enemybat(0, game, player.x + 2100, player.y - 100);
+      this.game.enemy0  = new this.Enemybat(0, this.game, this.game.player.x + 260, this.game.player.y + 350);
+      this.game.enemy1  = new this.Enemybat(0, this.game, this.game.player.x + 475, this.game.player.y - 75);
+      this.game.enemy2  = new this.Enemybat(0, this.game, this.game.player.x + 725, this.game.player.y - 75);
+      this.game.enemy3  = new this.Enemybat(0, this.game, this.game.player.x + 475, this.game.player.y + 200);
+      this.game.enemy4  = new this.Enemybat(0, this.game, this.game.player.x + 2500, this.game.player.y - 100);
+      this.game.enemy5  = new this.Enemybat(0, this.game, this.game.player.x + 2700, this.game.player.y - 125);
+      this.game.enemy6  = new this.Enemybat(0, this.game, this.game.player.x + 2900, this.game.player.y - 100);
+      this.game.enemy13 = new this.Enemybat(0, this.game, this.game.player.x + 2300, this.game.player.y - 125);
+      this.game.enemy14 = new this.Enemybat(0, this.game, this.game.player.x + 2100, this.game.player.y - 100);
 
-      // enemy7  = new AngryPlant(0, game, player.x + 15, player.y + 415);
-      // enemy8  = new AngryPlant(0, game, player.x + 500, player.y + 800);
-      // enemy9  = new AngryPlant(0, game, player.x + 300, player.y + 800);
-      // enemy10 = new AngryPlant(0, game, player.x + 100, player.y + 800);
-      // enemy11 = new AngryPlant(0, game, player.x + 2545, player.y + 280);
-      // enemy12 = new AngryPlant(0, game, player.x + 2700, player.y -350);
+      this.game.enemy7  = new this.AngryPlant(0, this.game, this.game.player.x + 15, this.game.player.y + 415);
+      this.game.enemy8  = new this.AngryPlant(0, this.game, this.game.player.x + 500, this.game.player.y + 800);
+      this.game.enemy9  = new this.AngryPlant(0, this.game, this.game.player.x + 300, this.game.player.y + 800);
+      this.game.enemy10 = new this.AngryPlant(0, this.game, this.game.player.x + 100, this.game.player.y + 800);
+      this.game.enemy11 = new this.AngryPlant(0, this.game, this.game.player.x + 2545, this.game.player.y + 280);
+      this.game.enemy12 = new this.AngryPlant(0, this.game, this.game.player.x + 2700, this.game.player.y -350);
 
-      // door = this.add.sprite(player.x + 1410, player.y + 610, 'door');
-      //        this.physics.arcade.enable(door);
-      //        door.body.allowGravity = false;
-      //        door.body.immovable = true;
+      this.game.door = this.game.add.sprite(this.game.player.x + 1410, this.game.player.y + 610, 'door');
+      this.game.physics.arcade.enable(this.game.door);
+      this.game.door.body.allowGravity = false;
+      this.game.door.body.immovable = true;
 
       // spikes0 = new DeathSpikes(0, game, player.x + 2408, player.y + 714);
       // spikes1 = new DeathSpikes(0, game, player.x + 2472, player.y + 714);
@@ -324,66 +326,106 @@ export class Level1 extends Phaser.State {
 
       this.game.player.body.velocity.x = 0;
 
-      this.game.physics.arcade.collide(this.game.player, this.game.blockedLayer);
+      this.game.physics.arcade
+        .collide(this.game.player, this.game.blockedLayer);
 
-      // this.game.physics.arcade.collide([enemy7.angryPlant, enemy8.angryPlant, enemy9.angryPlant, enemy10.angryPlant, enemy11.angryPlant, enemy12.angryPlant], blockedLayer);
+      this.game.physics.arcade
+        .collide(
+          [
+            this.game.enemy7.angryPlant,
+            this.game.enemy8.angryPlant,
+            this.game.enemy9.angryPlant,
+            this.game.enemy10.angryPlant,
+            this.game.enemy11.angryPlant,
+            this.game.enemy12.angryPlant
+          ],
+          this.game.blockedLayer);
 
-      // this.physics.arcade.collide(player, door, this.nextLevel, null, this);
+      this.game.physics.arcade
+        .collide(this.game.player, this.game.door, this.game.nextLevel, null, this);
 
-      // this.physics.arcade.collide(player, [blue0.blueGem, blue1.blueGem, blue2.blueGem, blue3.blueGem, blue4.blueGem, blue5.blueGem, blue6.blueGem, blue7.blueGem], this.item100, null, this);
+      this.game.physics.arcade
+        .collide(this.game.player,
+          [
+            this.game.blue0.blueGem,
+            // blue1.blueGem, blue2.blueGem, blue3.blueGem, blue4.blueGem, blue5.blueGem, blue6.blueGem, blue7.blueGem
+          ], this.item100, null, this);
       // this.physics.arcade.collide(player, [red0.redGem, red1.redGem, red2.redGem], this.item500, null, this);
       // this.physics.arcade.collide(player, [key0.goldKey, key1.goldKey], this.itemKey, null, this);
       // this.physics.arcade.collide(player, [magic0.magicBeaker], this.itemMagicBeaker, null, this);
 
       // this.physics.arcade.collide(player, [spikes0.deathSpikes, spikes1.deathSpikes, spikes2.deathSpikes, spikes3.deathSpikes, spikes4.deathSpikes, spikes5.deathSpikes, spikes6.deathSpikes, spikes7.deathSpikes, spikes8.deathSpikes, spikes9.deathSpikes], this.deathPit, null, this);
 
-      this.game.physics.arcade.collide(this.game.player,[
-        this.game.enemy0.bat,
-        // enemy1.bat, enemy2.bat, enemy3.bat, enemy4.bat, enemy5.bat, enemy6.bat, enemy7.angryPlant, enemy8.angryPlant, enemy9.angryPlant, enemy10.angryPlant, enemy11.angryPlant, enemy12.angryPlant, enemy13.bat, enemy14.bat
-      ], function(player){
-          // text1.setText("HP:" + (health -= 1) + " MP:" + mana);
-          player.animations.play('damage');
-          player.body.velocity.y = -550;
-
-      });
-
-      // playerDamage() {
-      //   console.log("Line 483 " + this.player)
-      //   // this.game.text1.setText("HP:" + (this.health -= 1) + " MP:" + this.mana);
-      //   // this.player.animations.play('damage');
-      //   this.player.body.velocity.y = -550;
-      // }
-
       this.game.physics.arcade
-          .overlap(this.game.fireballsRight,
+        .collide(this.game.player,
           [
             this.game.enemy0.bat,
-            // enemy1.bat, enemy2.bat, enemy3.bat, enemy4.bat, enemy5.bat, enemy6.bat, enemy13.bat, enemy14.bat
-          ], function(fireball, bat){
-              fireball.kill();
-              bat.kill();
-              this.game.text0.setText("Score: " + (this.game.score += 50));
-              this.game.fireballCollision = this.game.fireballCollisions.getFirstExists(false);
-              this.game.fireballCollision.reset(bat.body.x + 75, bat.body.y + 30);
-              this.game.fireballCollision.play('big-fireball-collision', 10, false, true);
-            },
+            this.game.enemy1.bat,
+            this.game.enemy2.bat,
+            this.game.enemy3.bat,
+            this.game.enemy4.bat,
+            this.game.enemy5.bat,
+            this.game.enemy6.bat,
+            this.game.enemy7.angryPlant,
+            this.game.enemy8.angryPlant,
+            this.game.enemy9.angryPlant,
+            this.game.enemy10.angryPlant,
+            this.game.enemy11.angryPlant,
+            this.game.enemy12.angryPlant,
+            this.game.enemy13.bat,
+            this.game.enemy14.bat
+          ], this.playerDamage
+        );
+        
+      this.game.physics.arcade
+        .overlap(this.game.fireballsRight,
+          [
+            this.game.enemy0.bat,
+            this.game.enemy1.bat,
+            this.game.enemy2.bat,
+            this.game.enemy3.bat,
+            this.game.enemy4.bat,
+            this.game.enemy5.bat,
+            this.game.enemy6.bat,
+            this.game.enemy13.bat,
+            this.game.enemy14.bat
+          ], this.collisionHandler, null, this);
 
-            null, this);
+      this.game.physics.arcade
+        .overlap(this.game.fireballsLeft,
+          [
+            this.game.enemy0.bat,
+            this.game.enemy1.bat,
+            this.game.enemy2.bat,
+            this.game.enemy3.bat,
+            this.game.enemy4.bat,
+            this.game.enemy5.bat,
+            this.game.enemy6.bat,
+            this.game.enemy13.bat,
+            this.game.enemy14.bat
+          ], this.collisionHandler, null, this);
 
-      // this.physics.arcade.overlap(fireballsLeft, [enemy0.bat, enemy1.bat, enemy2.bat, enemy3.bat, enemy4.bat, enemy5.bat, enemy6.bat, enemy13.bat, enemy14.bat], this.collisionHandler, null, this);
+      this.game.physics.arcade
+        .overlap(this.game.fireballsLeft,
+          [
+            this.game.enemy7.angryPlant,
+            this.game.enemy8.angryPlant,
+            this.game.enemy9.angryPlant,
+            this.game.enemy10.angryPlant,
+            this.game.enemy11.angryPlant,
+            this.game.enemy12.angryPlant
+          ], this.collisionHandler1, null, this);
 
-      // this.physics.arcade.overlap(fireballsLeft, [enemy7.angryPlant, enemy8.angryPlant, enemy9.angryPlant, enemy10.angryPlant, enemy11.angryPlant, enemy12.angryPlant], this.collisionHandler1, null, this);
-
-      // this.game.physics.arcade
-      //   .overlap(this.game.fireballsRight,
-      //     [
-      //       this.enemy7.angryPlant,
-      //       this.enemy8.angryPlant,
-      //       this.enemy9.angryPlant,
-      //       this.enemy10.angryPlant,
-      //       this.enemy11.angryPlant,
-      //       this.enemy12.angryPlant
-      //     ], this.collisionHandler1, null, this);
+      this.game.physics.arcade
+        .overlap(this.game.fireballsRight,
+          [
+            this.game.enemy7.angryPlant,
+            this.game.enemy8.angryPlant,
+            this.game.enemy9.angryPlant,
+            this.game.enemy10.angryPlant,
+            this.game.enemy11.angryPlant,
+            this.game.enemy12.angryPlant
+          ], this.collisionHandler1, null, this);
 
       if (this.game.health <= 0){
         this.game.deathScream.play();
@@ -416,7 +458,7 @@ export class Level1 extends Phaser.State {
       if (this.game.controls.up.isDown
         && (this.game.player.body.onFloor() || this.game.player.body.touching.down)
         && this.game.time.now > this.jumpTimer
-      ) {
+      ){
         this.game.jumpSound.play()
         this.game.player.body.velocity.y = -625;
         this.game.jumpTimer = this.game.time.now + 675;
@@ -430,14 +472,14 @@ export class Level1 extends Phaser.State {
         this.shootFireballRight();
       }
 
-      if (this.game.controls.shoot.isDown
+      if(this.game.controls.shoot.isDown
         && this.game.facing == 'left'
         && this.game.mana > 0
       ) {
         this.shootFireballLeft();
       }
 
-      if (this.game.player.body.velocity.x == 0 && this.game.player.body.velocity.y == 0 && !this.game.controls.shoot.isDown) {
+      if(this.game.player.body.velocity.x == 0 && this.game.player.body.velocity.y == 0 && !this.game.controls.shoot.isDown) {
         this.game.player.animations.play('idle');
       }
 
@@ -445,8 +487,8 @@ export class Level1 extends Phaser.State {
     }
 
     collisionHandler(fireball, bat) {
-      this.game.fireball.kill();
-      this.game.bat.kill();
+      fireball.kill();
+      bat.kill();
       this.game.text0.setText("Score: " + (this.game.score += 50));
       this.game.fireballCollision = this.game.fireballCollisions.getFirstExists(false);
       this.game.fireballCollision.reset(bat.body.x + 75, bat.body.y + 30);
@@ -454,8 +496,8 @@ export class Level1 extends Phaser.State {
     }
 
     collisionHandler1(fireball, angryPlant){
-      this.game.fireball.kill();
-      this.game.angryPlant.kill();
+      fireball.kill();
+      angryPlant.kill();
       this.game.text0.setText("Score: " + (this.game.score += 150));
       this.game.fireballCollision = this.game.fireballCollisions.getFirstExists(false);
       this.game.fireballCollision.reset(angryPlant.body.x - 15, angryPlant.body.y + 30);
@@ -467,19 +509,19 @@ export class Level1 extends Phaser.State {
     }
 
     item100(player, blueGem) {
-      this.game.blueGem.kill();
+      blueGem.kill();
       this.game.pickupItem.play();
       this.game.text0.setText("Score: " + (this.game.score += 100));
     }
 
     item500(player, redGem) {
-      this.game.redGem.kill();
+      redGem.kill();
       this.game.pickupItem.play();
       this.game.text0.setText("Score: " + (this.game.score += 500));
     }
 
     itemKey(player, goldKey) {
-      this.game.goldKey.kill();
+      goldKey.kill();
       this.game.pickupItem.play();
       this.game.text3.setText("Keys: " + (this.game.key += 1) +"/2");
     }
@@ -490,6 +532,7 @@ export class Level1 extends Phaser.State {
       this.game.text1.setText("HP:" + this.game.health + " MP:" + (this.game.mana += 10));
     }
 
+
     nextLevel() {
       if (this.game.key >= 2) {
       this.game.backgroundMusic.mute = true;
@@ -498,12 +541,13 @@ export class Level1 extends Phaser.State {
       }
     }
 
-    // playerDamage() {
-    //   console.log("Line 483 " + this.player)
-    //   // this.game.text1.setText("HP:" + (this.health -= 1) + " MP:" + this.mana);
-    //   // this.player.animations.play('damage');
-    //   this.player.body.velocity.y = -550;
-    // }
+    playerDamage(player, data) {
+      player.animations.play('damage');
+      player.body.velocity.y = -550;
+      data.game.health = data.game.health - 1;
+      data.game.text1.setText("HP:" + (data.game.health -= 1) + " MP:" + data.game.mana);
+
+    }
 
     shootFireballLeft() {
       if (this.game.time.now > this.shootTime) {
