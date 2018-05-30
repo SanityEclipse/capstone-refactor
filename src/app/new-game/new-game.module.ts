@@ -8,11 +8,12 @@ import { Boot } from './game-states/boot.component';
 import { Preloader } from './game-states/preloader.component';
 import { Menu } from './game-states/menu.component';
 import { Level1 } from './game-states/level-1.component';
+import { Endgame } from './game-states/endgame.component';
 
 @NgModule({
   imports:[ CommonModule, NewGameRoutingModule],
   exports:[],
-  declarations:[ NewGameComponent, Boot, Preloader, Menu, Level1 ],
+  declarations:[ NewGameComponent, Boot, Preloader, Menu, Level1, Endgame ],
   providers: []
 })
 
