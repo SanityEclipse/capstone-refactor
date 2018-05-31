@@ -340,7 +340,7 @@ export class Level1 extends Phaser.State {
           this.game.blockedLayer);
 
       this.game.physics.arcade
-        .collide(this.game.player, this.game.door, this.game.nextLevel, null, this);
+        .collide(this.game.player, this.game.door, this.nextLevel, null, this);
 
       this.game.physics.arcade
         .collide(this.game.player,
