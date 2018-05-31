@@ -73,18 +73,11 @@ export class Endgame extends Phaser.State {
 
 }
 
-
-
   update() {
     this.game.playerInfo = {
       name: this.game.name,
       score: this.game.score
     }
-  }
-
-  nextLevel() {
-    // ScoreService.createScores(name, score);
-
   }
 
 }

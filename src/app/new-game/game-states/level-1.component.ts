@@ -9,7 +9,6 @@ export class Level1 extends Phaser.State {
   game   : Phaser.Game;
   map    : Phaser.Tilemap;
   player : Phaser.Sprite;
-  bat    : Phaser.Enemybat;
 
   constructor() {
     super();
