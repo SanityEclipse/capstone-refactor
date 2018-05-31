@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 
 import * as Phaser from '../../../../node_modules/phaser-ce/build/phaser.js';
 
-@Component({
-  template:''
-})
+@Component({ template:`` })
 
 export class Endgame extends Phaser.State {
 
@@ -52,12 +50,16 @@ export class Endgame extends Phaser.State {
 
       else if (event.keyCode === 13) {
         // ENTER KEY
-
+        console.log('Enter key!');
         this.game.input.keyboard.onDownCallback = null;
         this.game.select.play();
         this.game.backgroundMusic.loop = false;
         this.game.backgroundMusic.stop();
-        this.nextLevel;
+        console.log("Next Level!")
+        this.name = "";
+        this.score = 0;
+        this.game.mana = 10;
+        this.game.state.start('Boot', true, true);
       }
 
       else {
@@ -80,12 +82,9 @@ export class Endgame extends Phaser.State {
     }
   }
 
-  nextlevel() {
+  nextLevel() {
     // ScoreService.createScores(name, score);
-    this.game.name = "";
-    this.game.score = 0;
-    this.game.mana = 10;
-    this.game.state.start('Boot', true, true);
+
   }
 
 }
