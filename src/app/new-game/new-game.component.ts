@@ -20,7 +20,7 @@ export class NewGameComponent implements OnInit {
     game : Phaser.Game;
 
   constructor() {
-    this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content')
+    this.game = new Phaser.Game(725, 525, Phaser.AUTO, 'content')
     this.game.state.add('Boot', Boot, false);
     this.game.state.add('Preloader', Preloader, false);
     this.game.state.add('Menu', Menu, false);
