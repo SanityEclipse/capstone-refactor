@@ -9,6 +9,8 @@ import { Directions } from './game-states/directions.component';
 import { Level1 }     from './game-states/level-1.component';
 import { Endgame }    from './game-states/endgame.component';
 
+import { Score } from './Score';
+
 @Component({
   selector: 'app-new-game',
   templateUrl: 'new-game.component.html',
