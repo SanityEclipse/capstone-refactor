@@ -14,6 +14,7 @@ export class Preloader extends Phaser.State {
   }
 
   preload() {
+    this.game.time.advancedTiming = true;
     this.game.load.image('logo', '../../../assets/images/items/blue-gem.png');
     this.game.preloadBar = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloaderBar');
     this.game.preloadBar.anchor.setTo(0.5, 0.5);

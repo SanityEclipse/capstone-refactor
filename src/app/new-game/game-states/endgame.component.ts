@@ -74,6 +74,10 @@ export class Endgame extends Phaser.State {
 }
 
   update() {
+
+    this.game.scale.setShowAll();
+    this.game.scale.refresh();
+    
     this.game.playerInfo = {
       name: this.game.name,
       score: this.game.score

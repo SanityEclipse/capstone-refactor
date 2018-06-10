@@ -45,6 +45,8 @@ export class Menu extends Phaser.State {
   }
 
   update() {
+    this.game.scale.setShowAll();
+    this.game.scale.refresh();
     this.timer += this.game.time.elapsed;
     if (this.timer >= 500) {
       this.timer -= 500;
