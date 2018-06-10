@@ -4,12 +4,8 @@
 
     <h5 class="card-title">Top 5 Scores</h5>
 
-    <ol id="topScores">
-      <li>TNR 3500</li>
-      <li>CLD 3250</li>
-      <li>AAA 1500</li>
-      <li>TOM 1250</li>
-      <li>ZZZ 1000</li>
+    <ol *ngFor="let score of scores" id="topScores">
+      <li>{{ score.name }} {{ score.score }}</li>
     </ol>
 
   </div>

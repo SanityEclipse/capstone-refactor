@@ -9,6 +9,8 @@ import { Directions } from './game-states/directions.component';
 import { Level1 }     from './game-states/level-1.component';
 import { Endgame }    from './game-states/endgame.component';
 
+import { ScoreService } from './score.service';
+
 import { Score } from './Score';
 
 @Component({
@@ -20,8 +22,11 @@ import { Score } from './Score';
 export class NewGameComponent implements OnInit {
 
     game : Phaser.Game;
+    scores: Score[] = [];
 
-  constructor() {
+  constructor(
+    private ScoreService : ScoreService
+  ){
     this.game = new Phaser.Game(725, 525, Phaser.AUTO, 'content')
     this.game.state.add('Boot', Boot, false);
     this.game.state.add('Preloader', Preloader, false);
@@ -33,7 +38,12 @@ export class NewGameComponent implements OnInit {
   }
 
   ngOnInit() {
-    // var game = new NewGameComponent();
+    this.getScores();
+  }
+
+  getScores(): void {
+    this.ScoreService.getScores()
+     .subscribe(scores => this.scores = scores);
   }
 
   ngOnDestroy() {
