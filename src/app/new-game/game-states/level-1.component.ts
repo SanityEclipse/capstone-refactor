@@ -322,6 +322,9 @@ export class Level1 extends Phaser.State {
 
     update() {
 
+      this.game.scale.setShowAll();
+      this.game.scale.refresh();
+
       this.game.player.body.velocity.x = 0;
 
       this.game.physics.arcade

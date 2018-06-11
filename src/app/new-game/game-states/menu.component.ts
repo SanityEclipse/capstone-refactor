@@ -33,7 +33,7 @@ export class Menu extends Phaser.State {
     var style2 = {
       font: "28px Press Start 2P", fill: "#99ccff", boundsAlignH: "center", boundsAlignV: "middle" };
 
-    this.game.text = this.game.add.text(0, 0, "The Last Flame Paladin\n\n         II", style);
+    this.game.text = this.game.add.text(0, 0, "The Last Flame Templar\n\n         II", style);
     this.game.text.setTextBounds(0, 100, 725, 100);
 
     this.game.text2 = this.game.add.text(200, 480, "PRESS ENTER", style);
@@ -45,6 +45,8 @@ export class Menu extends Phaser.State {
   }
 
   update() {
+    this.game.scale.setShowAll();
+    this.game.scale.refresh();
     this.timer += this.game.time.elapsed;
     if (this.timer >= 500) {
       this.timer -= 500;

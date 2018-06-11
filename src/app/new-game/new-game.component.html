@@ -1,1 +1,27 @@
-<div id="content"></div>
+<div class="row" style="margin-top:90px">
+
+  <div class="col-md-2 h-25 rounded border border-light text-white bg-dark">
+    <h5 class="card-title">Top 5 Scores</h5>
+    <ul *ngFor="let score of scores" id="topScores">
+      <li>{{ score.name }} {{ score.score }}</li>
+    </ul>
+  </div>
+
+  <!--PHASER RENDERS GAME HERE-->
+  <div class="col-md-8" id="content"></div>
+
+  <div class="col-md-2 h-25">
+    <ul id="navButtons" class="list-group list-group-flush text-center">
+      <li class="list-group-item rounded border border-light mb-3 bg-dark">
+        <a class="text-danger" href="#">Play</a>
+      </li>
+      <li class="list-group-item rounded border border-light mb-3 bg-dark">
+        <a class="text-danger" href="#">Tech</a>
+      </li>
+      <li class="list-group-item rounded border border-light mb-3 bg-dark">
+        <a class="text-danger" href="#">Contact</a>
+      </li>
+    </ul>
+  </div>
+
+</div>

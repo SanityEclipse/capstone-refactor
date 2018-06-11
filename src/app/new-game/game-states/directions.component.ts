@@ -50,6 +50,10 @@ export class Directions extends Phaser.State {
   }
 
   update() {
+
+    this.game.scale.setShowAll();
+    this.game.scale.refresh();
+
     if (this.enterKey.isDown) {
       this.game.select.play();
       this.game.backgroundMusic.loop = false;

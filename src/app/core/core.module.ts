@@ -2,10 +2,13 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { FooterComponent } from './footer.component';
+import { NavbarComponent } from './navbar.component';
+
 @NgModule({
   imports: [ CommonModule, RouterModule ],
-  exports: [],
-  declarations: [],
+  exports: [ FooterComponent, NavbarComponent ],
+  declarations: [ FooterComponent, NavbarComponent],
   providers: []
 })
 

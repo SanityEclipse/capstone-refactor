@@ -15,6 +15,11 @@ export class Boot extends Phaser.State {
   init() {
     this.game.input.maxpointers = 1;
     this.game.stage.disableVisibityChange = true;
+    this.game.scale.scaleMode = Phaser.ScaleManager.aspectRatio;
+    this.game.scale.pageAlignVertically = true;
+    this.game.scale.pageAlignHorizontally = true;
+    this.game.scale.setShowAll();
+    this.game.scale.refresh();
   }
 
   preload() {
