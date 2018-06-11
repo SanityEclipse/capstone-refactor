@@ -1,15 +1,13 @@
 <div class="row" style="margin-top:90px">
 
   <div class="col-md-2 h-25 rounded border border-light text-white bg-dark">
-
     <h5 class="card-title">Top 5 Scores</h5>
-
-    <ol *ngFor="let score of scores" id="topScores">
+    <ul *ngFor="let score of scores" id="topScores">
       <li>{{ score.name }} {{ score.score }}</li>
-    </ol>
-
+    </ul>
   </div>
 
+  <!--PHASER RENDERS GAME HERE-->
   <div class="col-md-8" id="content"></div>
 
   <div class="col-md-2 h-25">
