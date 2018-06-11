@@ -46,7 +46,7 @@ export class NewGameComponent implements OnInit {
 
   getScores(): void {
     this.scoreService.getScores()
-     .subscribe(scores => this.scores = scores);
+     .subscribe(scores => this.scores = scores.slice(0,5));
   }
 
   addScore(id, name, game): void{
