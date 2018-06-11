@@ -1,21 +1,31 @@
-import { Component } from '@angular/core';
-
+import { Component} from '@angular/core';
+import { Score } from '../Score';
+import { ScoreService } from '../score.service';
 import * as Phaser from '../../../../node_modules/phaser-ce/build/phaser.js';
 
 @Component({ template:`` })
 
 export class Endgame extends Phaser.State {
 
-  game : Phaser.Game;
-
-  constructor() {
+  constructor(
+    public scoreService : ScoreService,
+  ){
     super()
   }
+
+  game : Phaser.Game;
+  scores: Score[] = [];
 
   backgroundMusic;
   score;
   name="";
   playerInfo;
+  id = 10;
+
+  // ngOnInit() {
+  //   window.my = window.my || {};
+  //   window.my.namespace = window.my.namespace || {};
+  // }
 
   create() {
     this.game.backgroundMusic = this.game.add.audio('gameover');
@@ -50,12 +60,12 @@ export class Endgame extends Phaser.State {
 
       else if (event.keyCode === 13) {
         // ENTER KEY
-        console.log('Enter key!');
+        console.log(this.name + " " + this.game.score + " " + window.my.namespace.addScore)
+        window.my.namespace.addScore(this.id, this.name, this.game.score);
         this.game.input.keyboard.onDownCallback = null;
         this.game.select.play();
         this.game.backgroundMusic.loop = false;
         this.game.backgroundMusic.stop();
-        console.log("Next Level!")
         this.name = "";
         this.score = 0;
         this.game.mana = 10;
@@ -66,7 +76,7 @@ export class Endgame extends Phaser.State {
         this.name += event.key;
       }
 
-      this.game.text7 = this.game.add.text(220, 100, "GAME OVER \n\n  " + this.name, this.game.style);
+        this.game.text7 = this.game.add.text(220, 100, "GAME OVER \n\n  " + this.name, this.game.style);
       }
 
       this.game.input.keyboard.addCallbacks(this, keyPress);
@@ -77,11 +87,20 @@ export class Endgame extends Phaser.State {
 
     this.game.scale.setShowAll();
     this.game.scale.refresh();
-    
+
     this.game.playerInfo = {
-      name: this.game.name,
+      name: this.name,
       score: this.game.score
     }
+
   }
+
+  // addScore( score : Score ): void {
+  //   this.scoreService.createScores({ name:this.name, score:this.game.score } as Score)
+  //     .subscribe(score => {
+  //       this.scores.push(score);
+  //     });
+  // }
+
 
 }
