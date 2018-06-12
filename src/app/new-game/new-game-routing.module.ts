@@ -5,7 +5,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewGameComponent } from './new-game.component';
 
 const routes:Routes = [
-  { path: 'new-game', component: NewGameComponent }
+  {
+    path: '',
+    component: NewGameComponent
+  }
 ]
 
 @NgModule({
