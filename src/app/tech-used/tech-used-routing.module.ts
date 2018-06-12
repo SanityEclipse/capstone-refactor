@@ -5,7 +5,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { TechUsedComponent } from './tech-used.component';
 
 const routes: Routes = [
-  { path:'', component: TechUsedComponent }
+  {
+    path:'',
+    component: TechUsedComponent
+  }
 ]
 
 @NgModule({
