@@ -24,7 +24,6 @@ import { AppComponent } from './app.component';
       InMemoryDataService, { dataEncapsulation: false }
     ),
     NewGameModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]
