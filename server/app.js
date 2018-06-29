@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use('/', routes);
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname + 'dist/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
 // catch 404 and forward to error handler
